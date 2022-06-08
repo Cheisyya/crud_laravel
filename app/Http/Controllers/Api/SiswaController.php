@@ -17,7 +17,11 @@ class SiswaController extends Controller
     public function index()
     {
 
-      //
+        $siswa = Siswa::all();
+
+        return response()->json([
+            'siswa'=> $siswa
+        ]);
     }
 
     /**
@@ -113,6 +117,19 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $siswa)
     {
-       //
+        $siswa->delete();
+
+        if($siswa) {
+            return response()->json([
+                'message' => 'Berhasil Hapus Data Siswa',
+            ], 200);
+
+        }
+
+        //data not found
+        return response()->json([
+            'message' => 'Gagal Hapus Data Siswa',
+        ], 404);
     }
 }
+
